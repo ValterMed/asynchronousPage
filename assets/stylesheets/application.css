@@ -1,0 +1,82 @@
+.pager {
+  text-align: center; }
+
+.cards-container {
+  margin-left: 30px; }
+  @media screen and (min-width: 376px) {
+    .cards-container {
+      margin-left: 113px; } }
+
+.card {
+  float: left;
+  font-size: 12px;
+  border-radius: 5px;
+  border-style: groove;
+  border-width: 2px;
+  border-color: #b7b0b0;
+  margin: 5px; }
+  @media screen and (min-width: 376px) {
+    .card {
+      font-size: 18px;
+      float: left;
+      padding: 20px;
+      border-radius: 5px;
+      border-style: groove;
+      border-width: 2px;
+      border-color: #b7b0b0;
+      margin: 5px; } }
+  .card .avatar-image {
+    float: left;
+    margin: 0;
+    text-align: center;
+    padding-top: 40px; }
+    @media screen and (min-width: 376px) {
+      .card .avatar-image {
+        float: left;
+        margin: 0;
+        text-align: center; } }
+    .card .avatar-image .footer-image-title {
+      padding-top: 5px; }
+      @media screen and (min-width: 376px) {
+        .card .avatar-image .footer-image-title {
+          padding-top: 10px; } }
+  .card .avatar-info-container {
+    float: left;
+    text-align: justify;
+    margin: 5px; }
+    @media screen and (min-width: 376px) {
+      .card .avatar-info-container {
+        margin: 10px; } }
+    .card .avatar-info-container .avatar-info {
+      padding-bottom: 30px;
+      font-size: 14px; }
+      @media screen and (min-width: 376px) {
+        .card .avatar-info-container .avatar-info {
+          padding-bottom: 54px;
+          font-size: 24px; } }
+    .card .avatar-info-container .footer-container {
+      clear: left; }
+      .card .avatar-info-container .footer-container .comment-notification {
+        float: left;
+        margin-right: 5px;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #865ef7; }
+        @media screen and (min-width: 376px) {
+          .card .avatar-info-container .footer-container .comment-notification {
+            margin-right: 10px;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: #865ef7; } }
+      .card .avatar-info-container .footer-container .request-notification {
+        float: left;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #865ef7; }
+        @media screen and (min-width: 376px) {
+          .card .avatar-info-container .footer-container .request-notification {
+            border-radius: 5px;
+            padding: 5px;
+            background-color: #865ef7; } }
+
+/*# sourceMappingURL=application.css.map */

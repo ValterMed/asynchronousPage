@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Departments Rent</title>
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/stylesheets/application.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="pager">
+    <button type="submit" id="buttonL" onclick="searchPeopleBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+    <button type="submit" id="buttonR" onclick="searchPeopleForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    var number = 1;
+    function firstView() {
+      var queryURL = "https://reqres.in/api/users?page=1";
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function(response) {
+        $(".cards-container").html("");
+        for(var i = 0; i < response.data.length; i++) {
+          var div = `
+          <div class="card">
+            <figure class="avatar-image">
+              <img src=` + response.data[i].avatar + ` height="40"/>
+              <figcaption class="footer-image-title">Avatar</figcaption>
+            </figure>
+            <div class="avatar-info-container">
+              <div class="avatar-info">
+                <strong>` + response.data[i].id + `</strong><br/>`
+                + response.data[i].email + `<br/><br/>` 
+                + response.data[i].first_name + `<br/>` 
+                + response.data[i].last_name + `<br/>
+              </div>
+              <div class="footer-container">
+                <div class="comment-notification">
+                  2 comentarios
+                </div>
+                <div class="request-notification">
+                  3 solicitudes de cita
+                </div>
+              </div>
+            </div>
+          </div>`;
+        $(".cards-container").append(div)
+        }
+        buttonL.disabled = true;
+      });
+    }
+    firstView();
+
+    function searchPeopleForward() {
+      number += 1;
+      var pageNumber = number.toString();
+      console.log("Mostrando numero de pagina")
+      console.log(pageNumber)
+      var queryURL = "https://reqres.in/api/users?page="+pageNumber;
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function(response) {
+        if (response.data.length > 0) {
+          $(".cards-container").html("");
+          for(var i = 0; i < response.data.length; i++) {
+            var div = `
+            <div class="card">
+              <figure class="avatar-image">
+                <img src=` + response.data[i].avatar + ` height="40"/>
+                <figcaption class="footer-image-title">Avatar</figcaption>
+              </figure>
+              <div class="avatar-info-container">
+                <div class="avatar-info">
+                  <strong>` + response.data[i].id + `</strong><br/>`
+                  + response.data[i].email + `<br/><br/>` 
+                  + response.data[i].first_name + `<br/>` 
+                  + response.data[i].last_name + `<br/>
+                </div>
+                <div class="footer-container">
+                  <div class="comment-notification">
+                    2 comentarios
+                  </div>
+                  <div class="request-notification">
+                    3 solicitudes de cita
+                  </div>
+                </div>
+              </div>
+            </div>`;
+          $(".cards-container").append(div)
+          }
+        } else {
+          buttonR.disabled = true;
+          buttonL.disabled = false;
+          number = 4;
+        }
+      });
+    }
+
+    function searchPeopleBackward() {
+      number -= 1;
+      var pageNumber = number.toString();
+      console.log("Mostrando numero de pagina")
+      console.log(pageNumber)
+      var queryURL = "https://reqres.in/api/users?page="+pageNumber;
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function(response) {
+        if (number > 0) {
+          $(".cards-container").html("");
+          for(var i = 0; i < response.data.length; i++) {
+            var div = `
+            <div class="card">
+              <figure class="avatar-image">
+                <img src=` + response.data[i].avatar + ` height="40"/>
+                <figcaption class="footer-image-title">Avatar</figcaption>
+              </figure>
+              <div class="avatar-info-container">
+                <div class="avatar-info">
+                  <strong>` + response.data[i].id + `</strong><br/>`
+                  + response.data[i].email + `<br/><br/>` 
+                  + response.data[i].first_name + `<br/>` 
+                  + response.data[i].last_name + `<br/>
+                </div>
+                <div class="footer-container">
+                  <div class="comment-notification">
+                    2 comentarios
+                  </div>
+                  <div class="request-notification">
+                    3 solicitudes de cita
+                  </div>
+                </div>
+              </div>
+            </div>`;
+          $(".cards-container").append(div)
+          }
+        } else {
+          buttonL.disabled = true;
+          buttonR.disabled = false;
+        }
+      });
+    }
+  </script>
+  <div class="cards-container">
+  </div>
+</body>
+</html>

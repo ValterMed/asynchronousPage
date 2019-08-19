@@ -1,0 +1,100 @@
+@import 'mobile_size';
+
+.pager {
+  text-align: center;
+}
+
+.cards-container {
+  margin-left: 30px;
+
+  @media screen and (min-width: $mobile_screen) {
+    margin-left: 113px;
+  }
+}
+
+.card {
+  float: left;
+  font-size: 12px;
+  border-radius: 5px;
+  border-style: groove;
+  border-width: 2px;
+  border-color: #b7b0b0;
+  margin: 5px;
+
+  @media screen and (min-width: $mobile_screen) {
+    font-size: 18px;
+    float: left;
+    padding: 20px;
+    border-radius: 5px;
+    border-style: groove;
+    border-width: 2px;
+    border-color: #b7b0b0;
+    margin: 5px;
+  }
+  .avatar-image {
+    float: left;
+    margin: 0;
+    text-align: center;
+    padding-top: 40px;
+
+    @media screen and (min-width: $mobile_screen) {
+      float: left;
+      margin: 0;
+      text-align: center;
+    }
+    .footer-image-title {
+      padding-top: 5px;
+
+      @media screen and (min-width: $mobile_screen) {
+      padding-top: 10px;
+      }
+    }  
+  }
+  .avatar-info-container {
+    float: left;
+    text-align: justify;
+    margin: 5px;
+
+    @media screen and (min-width: $mobile_screen) {
+      margin: 10px;
+    }
+    .avatar-info {
+      padding-bottom: 30px;
+      font-size: 14px;
+
+      @media screen and (min-width: $mobile_screen) {
+        padding-bottom: 54px;
+        font-size: 24px;
+      }
+    }
+    .footer-container {
+      clear: left;
+      .comment-notification {
+        float: left;
+        margin-right: 5px;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #865ef7;
+
+        @media screen and (min-width: $mobile_screen) {
+          margin-right: 10px;
+          border-radius: 5px;
+          padding: 5px;
+          background-color: #865ef7;
+        }
+      }
+      .request-notification {
+        float: left;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #865ef7;
+
+        @media screen and (min-width: $mobile_screen) {
+          border-radius: 5px;
+          padding: 5px;
+          background-color: #865ef7;
+        }
+      }
+    }
+  }
+}
