@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Departments Rent</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/stylesheets/application.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="pager">
+    <button type="submit" id="buttonL" onclick="searchPeopleBackward()"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+    <button type="submit" id="buttonR" onclick="searchPeopleForward()"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    var number = 1;
+    location.hash = "new";
+
+    function getParameterByName(name) {
+      let currentState = history.state;
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+      results === null ? results = false : decodeURIComponent(results[1].replace(/\+/g, " "));
+      var stateObj = { asynchronousPage: "page" };
+      if (results[1] === undefined) {
+        history.replaceState(stateObj, "nextPage", "asynchronousPage.html?page=1");
+        firstView("1");
+      } else {
+        history.replaceState(stateObj, "nextPage", "asynchronousPage.html?page="+results[1]);
+        firstView(results[1]);
+      }
+    }
+
+    function firstView(page) {
+      var queryURL = "https://reqres.in/api/users?page="+page;
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function(response) {
+        if (response.data.length == 0) {
+          alert("No existen datos para ese valor del parametro 'page'")
+        } else {
+        firstViewResponse(response, page);
+        }
+      });
+    }
+    firstView();
+
+    function searchPeopleForward() {
+      number += 1;
+      var pageNumber = number.toString();
+      console.log("Mostrando numero de pagina")
+      console.log(pageNumber)
+      var stateObj = { asynchronousPage: "page" };
+      history.replaceState(stateObj, "nextPage", "asynchronousPage.html?page="+pageNumber);
+      var queryURL = "https://reqres.in/api/users?page="+pageNumber;
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done( function (response){
+        forwardResponse(response, pageNumber);
+      });
+    }
+
+    function searchPeopleBackward() {
+      number -= 1;
+      var pageNumber = number.toString();
+      console.log("Mostrando numero de pagina")
+      console.log(pageNumber)
+      var stateObj = { asynchronousPage: "page" };
+      history.replaceState(stateObj, "nextPage", "asynchronousPage.html?page="+pageNumber);
+      var queryURL = "https://reqres.in/api/users?page="+pageNumber;
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function (response) {
+        backwardResponse(response, pageNumber);
+      });
+    }
+
+    function firstViewResponse(response, page) {
+      $(".cards-container").html("");
+      for(var i = 0; i < response.data.length; i++) {
+        var div = `
+        <div class="card">
+          <figure class="avatar-image">
+            <img src=` + response.data[i].avatar + ` class="size-image"/>
+            <figcaption class="footer-image-title">Publicado</figcaption>
+          </figure>
+          <div class="avatar-info-container">
+            <div class="avatar-info">
+              <strong>` + response.data[i].id + `</strong>
+              -Baja California 284 <br/>`
+              + response.data[i].email + `<br/><br/>` 
+              + response.data[i].first_name + ` ` 
+              + response.data[i].last_name + `<br/>
+              55 8733 9002
+            </div>
+            <div class="footer-container">
+              <div class="comment-notification">
+                2 comentarios
+              </div>
+              <div class="request-notification">
+                3 solicitudes de cita
+              </div>
+            </div>
+          </div>
+        </div>`;
+      $(".cards-container").append(div)
+      }
+      var stateObj = { asynchronousPage: "page" };
+      history.replaceState(stateObj, "nextPage", "asynchronousPage.html?page="+page);
+      buttonL.disabled = true;
+    }
+
+    function forwardResponse(response, pageNumber) {
+      if (response.data.length > 0) {
+        $(".cards-container").html("");
+        for(var i = 0; i < response.data.length; i++) {
+          var div = `
+          <div class="card">
+            <figure class="avatar-image">
+              <img src=` + response.data[i].avatar + ` class="size-image"/>
+              <figcaption class="footer-image-title">Publicado</figcaption>
+            </figure>
+            <div class="avatar-info-container">
+              <div class="avatar-info">
+                <strong>` + response.data[i].id + `</strong><br/>`
+                + response.data[i].email + `<br/><br/>` 
+                + response.data[i].first_name + `<br/>` 
+                + response.data[i].last_name + `<br/>
+              </div>
+              <div class="footer-container">
+                <div class="comment-notification">
+                  2 comentarios
+                </div>
+                <div class="request-notification">
+                  3 solicitudes de cita
+                </div>
+              </div>
+            </div>
+          </div>`;
+        $(".cards-container").append(div)
+        }
+        if (response.total_pages == pageNumber) {
+          buttonR.disabled = true;
+          buttonL.disabled = false;
+        }
+      } 
+    }
+
+    function backwardResponse(response, pageNumber) {
+      if (pageNumber > 0) {
+        $(".cards-container").html("");
+        for(var i = 0; i < response.data.length; i++) {
+          var div = `
+          <div class="card">
+            <figure class="avatar-image">
+              <img src=` + response.data[i].avatar + ` class="size-image"/>
+              <figcaption class="footer-image-title">Publicado</figcaption>
+            </figure>
+            <div class="avatar-info-container">
+              <div class="avatar-info">
+                <strong>` + response.data[i].id + `</strong><br/>`
+                + response.data[i].email + `<br/><br/>` 
+                + response.data[i].first_name + `<br/>` 
+                + response.data[i].last_name + `<br/>
+              </div>
+              <div class="footer-container">
+                <div class="comment-notification">
+                  2 comentarios
+                </div>
+                <div class="request-notification">
+                  3 solicitudes de cita
+                </div>
+              </div>
+            </div>
+          </div>`;
+        $(".cards-container").append(div)
+        }
+        if (pageNumber == 1) {
+          buttonL.disabled = true;
+          buttonR.disabled = false;
+        }
+      }
+    }
+
+    window.onhashchange = function() {
+      getParameterByName('page')
+    };
+  </script>
+  <div class="cards-container">
+  </div>
+</body>
+</html>
