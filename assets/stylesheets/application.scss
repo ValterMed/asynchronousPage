@@ -1,0 +1,122 @@
+@import 'mobile_size';
+
+.pager {
+  text-align: center;
+}
+
+.cards-container {
+  //margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 359px;
+  .card {
+    background-color: #fff;
+    //float: left;
+    width: 335px;
+    margin: 5px;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    border-style: outset;
+    box-shadow: 2px 2px 3px 3px #ddd9d9;
+    border-width: 2px;
+    border-color: #fff;
+
+    @media screen and (min-width: $mobile_screen) {
+      font-size: 18px;
+      //float: left;
+      width: 512px;
+      padding: 5px;
+      border-radius: 5px;
+      border-style: outset;
+      box-shadow: 2px 2px 3px 3px #ddd9d9;
+      border-width: 2px;
+      border-color: #fff;
+      margin: 5px;
+    }
+    .avatar-image {
+      float: left;
+      margin: 0 0 0 1px;
+      text-align: center;
+      padding-top: 8px;
+
+      @media screen and (min-width: $mobile_screen) {
+        float: left;
+        margin: 0;
+        text-align: center;
+        padding-top: 15px;
+      }
+      .size-image {
+        width: 68px;
+        height: 76px;
+
+        @media screen and (min-width: $mobile_screen) {
+          height: 158px;
+          width: 145px;
+        }
+      }
+      .footer-image-title {
+        padding-top: 5px;
+
+        @media screen and (min-width: $mobile_screen) {
+        padding-top: 10px;
+        color: gray;
+        }
+      }  
+    }
+    .avatar-info-container {
+      float: left;
+      text-align: justify;
+      margin: 5px;
+
+      @media screen and (min-width: $mobile_screen) {
+        margin: 10px;
+      }
+      .avatar-info {
+        padding-bottom: 6px;
+        font-size: 12px;
+
+        @media screen and (min-width: $mobile_screen) {
+          padding-bottom: 25px;
+          font-size: 24px;
+        }
+      }
+      .footer-container {
+        clear: left;
+        .comment-notification {
+          float: left;
+          margin-right: 5px;
+          border-radius: 5px;
+          padding: 5px;
+          background-color: #a68bf0;
+
+          @media screen and (min-width: $mobile_screen) {
+            margin-right: 10px;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: #a68bf0;
+          }
+        }
+        .request-notification {
+          float: left;
+          border-radius: 5px;
+          padding: 5px;
+          background-color: #a68bf0;
+
+          @media screen and (min-width: $mobile_screen) {
+            border-radius: 5px;
+            padding: 5px;
+            background-color: #a68bf0;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $mobile_screen) {
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: unset;
+    width: 1188px;
+  }
+}
